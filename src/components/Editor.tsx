@@ -2,7 +2,7 @@ import { styled } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { basicSetup, EditorState, EditorView } from '@codemirror/basic-setup';
 import { keymap, ViewUpdate } from "@codemirror/view"
-import { juri } from "../lang-juri/lang-juri";
+import { juri, highlightStyle as juriHighlightStyle} from "../lang-juri/lang-juri";
 
 const EditorDiv = styled('div')(({ theme }) => ({
   ...theme.shape,
@@ -19,7 +19,12 @@ const EditorDiv = styled('div')(({ theme }) => ({
   '.cm-activeLine, .cm-gutters, .cm-activeLineGutter': {
     background: 'transparent'
   },
-  cursor: 'text'
+  '& .cm-editor.cm-focused':{
+    outline: 'none'
+  },
+  '.cm-cursor':{
+    borderLeftColor: '#0f0'
+  }
 }));
 
 export default function Editor({ref} : {ref? : React.RefObject<HTMLDivElement>}) {
@@ -34,6 +39,7 @@ export default function Editor({ref} : {ref? : React.RefObject<HTMLDivElement>})
     }
   ];
 
+  // not smart but works
   const updateListener = (update: ViewUpdate) => {
       localStorage.setItem('code', update.view.state.doc.toString())
   };
@@ -41,7 +47,11 @@ export default function Editor({ref} : {ref? : React.RefObject<HTMLDivElement>})
   useEffect(() => {
     const state = EditorState.create({
       doc:  localStorage.getItem('code') || '',
-      extensions: [basicSetup, juri(), EditorView.lineWrapping, keymap.of(keybindings),
+      extensions: [
+        basicSetup, 
+        juri(),
+        juriHighlightStyle,
+        EditorView.lineWrapping, keymap.of(keybindings),
         EditorView.updateListener.of(updateListener)]
     });
 
@@ -52,7 +62,6 @@ export default function Editor({ref} : {ref? : React.RefObject<HTMLDivElement>})
     
     if (!state.doc)
       view.dispatch({ changes: { from: 0, insert: '\n'.repeat(25) } });
-
     return () => view.destroy();
   }, []);
   return (

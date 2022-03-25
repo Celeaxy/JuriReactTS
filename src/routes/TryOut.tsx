@@ -19,15 +19,18 @@ import base64url from 'base64url';
 window.Buffer = window.Buffer || require('buffer').Buffer;
 
 
-
+type InterpreterError = {
+  message: string
+  line: number
+}
 export default function TryOut({ theme }: { theme?: Theme }) {
-  let [code, setCode] = useState(localStorage.getItem('code') || '');
   let [output, setOutput] = useState('');
 
   let [loading, setLoading] = useState(false);
   let editor = useRef<HTMLDivElement>(null);
   
   let handleRun = function () {
+    let code = localStorage.getItem('code') || '';
     if (!code) {
       setOutput('');
       return;
@@ -35,9 +38,15 @@ export default function TryOut({ theme }: { theme?: Theme }) {
     let encoded = base64url(code);
 
     setLoading(true);
-    axios.get('https://juri-online-compiler.herokuapp.com/jurii?code=' + encoded)
-      .then(res => setOutput(output + res.data.standard + res.data.error))
-      .catch(err => setOutput(output + err))
+    axios.get('https://juriwebinterpreter.herokuapp.com/interpret?code=' + encoded)
+      .then(res =>{
+        let standard = res.data.standard.reduce((s: string, curr: string) => s + curr, '');
+        console.log(JSON.stringify(res.data));
+        let error = (res.data.error.length || '') && '\n' + res.data.error.map((e : InterpreterError) => e.message+'\n'+`Zeile ${e.line}`).join('\n')+'\n';
+        
+        setOutput(output + standard + error);
+      })
+      .catch(err => setOutput(output + 'Internal Error:\n' + err))
       .finally(() => {
         setLoading(false)
         let out = document.getElementById('out')!;
