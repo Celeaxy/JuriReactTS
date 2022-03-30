@@ -80,7 +80,7 @@ export default function Navigation({ children }: { children?: ReactNode }) {
 
     return <>
         <AppBar position='fixed' >
-            <Toolbar sx={{color: 'white', opacity:0.5, backdropFilter: 'blur(10px)', ...(open && { marginLeft: `${drawerWidth}px` }) }}>
+            <Toolbar style={{backgroundColor:'rgba(255,255,255,0)'}} sx={{opacity:0.5, ...(open && { marginLeft: `${drawerWidth}px` }) }}>
                 <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2, ...(open && { display: 'none' }) }} onClick={handleDrawerOpen}>
                     <MenuIcon />
                 </IconButton>

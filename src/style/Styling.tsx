@@ -1,12 +1,10 @@
 import { GlobalStyles } from '@mui/styled-engine';
-import { createTheme, CssBaseline, useTheme } from '@mui/material';
+import { createTheme, CssBaseline} from '@mui/material';
 
 
 const globalStylesProps = {
-  '.MuiPaper-root.MuiAppBar-root' :{backdropFilter : 'blur(4px)'},
-  '.MuiInputBase-root.MuiOutlinedInput-root' : {color: 'transparent', caretColor: 'rgb(0,255,0)',
+  '.MuiPaper-root.MuiAppBar-root' :{backdropFilter : 'blur(4px)', backgroundColor: 'rgba(255,255,255, 0.3)'},
   '& ::selection' :{ color : 'transparent', backgroundColor: 'grey'
-  }
   }
 }
 
@@ -18,7 +16,7 @@ const globalStyling = <>
 const theme = createTheme({
       palette: {
         primary: {
-          main: 'rgba(50,50,50,0.8)',
+          main: 'rgba(255,255,255)',
         },
         secondary: {
           main: '#f50057',
