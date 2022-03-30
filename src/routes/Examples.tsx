@@ -11,14 +11,10 @@ function Example({title, code}:{title: string, code : string}){
         navigator.clipboard.write(data);
     }
 
-    return <div><div><h2>{title} <Button variant='outlined' onClick={copy} color='secondary' sx={{fontWeight: 'bold'}}>Copy!</Button></h2></div><div><pre>{code}</pre></div></div>
+    return <div><div><h2>{title} <Button variant='outlined' onClick={copy} color='primary' sx={{fontWeight: 'bold'}}>Copy!</Button></h2></div><div><pre>{code}</pre></div></div>
 }
 export default function Examples() {
     let [examples, setExamples] = useState([] as JSX.Element[])
-    
-    const getExample = function(fileName: string) {
-        return axios.get(`https://raw.githubusercontent.com/SebastianBrack/JuriLang/master/JuriConsole/examples/${fileName}`)
-    };
 
     useEffect(() =>{
         axios.get('https://raw.githubusercontent.com/SebastianBrack/JuriLang/master/JuriConsole/examples/examples.toc')

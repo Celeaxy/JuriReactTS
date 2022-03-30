@@ -16,9 +16,6 @@ function App() {
   const [output, setOutput]  = useState('');
 
   let handleRun = function(){
-    axios.get('https://icanhazdadjoke.com/search?term='+code, { headers: {'Accept': 'application/json'}})
-    .then(res => setOutput(res.data.results.map((r : DadJokesResult) => r.joke).join('\n\n')))
-    .catch(err => setOutput(err));
   }
   let handleChange = function(event :ChangeEvent<HTMLTextAreaElement>){
     setCode(event.target.value);

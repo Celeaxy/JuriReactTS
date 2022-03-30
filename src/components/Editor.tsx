@@ -16,6 +16,11 @@ const EditorDiv = styled('div')(({ theme }) => ({
   margin: '2%',
   display: 'inline-flex',
   overflowY: 'auto',
+  
+  '& *':{
+    fontFamily: 'JetBrains Mono Regular',
+    fontVariantLigatures: 'normal'
+  },
   '.cm-activeLine, .cm-gutters, .cm-activeLineGutter': {
     background: 'transparent'
   },
@@ -27,9 +32,9 @@ const EditorDiv = styled('div')(({ theme }) => ({
   }
 }));
 
-export default function Editor({ref, style} : {ref? : React.RefObject<HTMLDivElement>, style? : CSSProperties}) {
+export default function Editor({reference, style} : {reference? : React.RefObject<HTMLDivElement>, style? : CSSProperties}) {
   let editor = useRef<HTMLDivElement>(null);
-  editor = ref || editor;
+  editor = reference || editor;
 
   const keybindings = [
     {

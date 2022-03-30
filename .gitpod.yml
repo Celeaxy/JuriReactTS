@@ -3,3 +3,4 @@ tasks:
     command: yarn run dev
 ports:
   - port: 3000
+    onOpen: open-browser
