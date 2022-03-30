@@ -1,6 +1,13 @@
-declare  global{
-    type DadJokesResult = {
-       joke : string
-   }
+declare global {
+    type InterpreterError = {
+        message: string
+        line: number
+    }
+    type InterpreterResult = {
+        status: number =  0,
+        standard: string[] = [],
+        error: InterpreterError[] = [],
+        meta: string[] = []
+    }
 }
-export{}
+export { }
