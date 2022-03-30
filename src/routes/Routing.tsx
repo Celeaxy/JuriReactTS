@@ -1,5 +1,6 @@
 import TryOut from './TryOut';
-import { Documentation, ReadMe } from './Contents';
+import {ReadMe } from './Contents';
+import Examples from './Examples';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -16,9 +17,9 @@ export default function Routing() {
 export const AppRoutes = {
   get routes() {
     return {
-      '/': <TryOut />,
-      '/documentation': Documentation,
-      '/readme': ReadMe
+      '/': {component:<TryOut />, title: 'Home'},
+      '/readme': {component: ReadMe, title:'ReadMe'},
+      '/examples' : {component: <Examples />, title: 'Beispiele'}
     }
   },
 
@@ -31,7 +32,7 @@ export const AppRoutes = {
     return Object.entries(this.routes).map(
       e =>
       <>
-        <Route path={e[0]} element={e[1]} />
+        <Route path={e[0]} element={e[1].component} />
       </>);
   }
 }

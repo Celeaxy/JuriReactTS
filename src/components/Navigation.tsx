@@ -107,9 +107,9 @@ export default function Navigation({ children }: { children?: ReactNode }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {AppRoutes.paths.map((text, index) => (
-            <ListItem button component='a' href={text} key={text}>
-              <ListItemText primary={text} />
+          {AppRoutes.paths.map((path, index) => (
+            <ListItem button component='a' href={path} key={path}>
+              <ListItemText primary={AppRoutes.routes[path].title} />
             </ListItem>
           ))}
         </List>

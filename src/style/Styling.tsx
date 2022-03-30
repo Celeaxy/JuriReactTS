@@ -18,14 +18,14 @@ const globalStyling = <>
 const theme = createTheme({
       palette: {
         primary: {
-          main: 'rgba(100,100,100,0.8)',
+          main: 'rgba(50,50,50,0.8)',
         },
         secondary: {
           main: '#f50057',
         },
         background: {
-          default: '#323232',
-          paper: '#646464',
+          default: '#040404',
+          paper: '#111',
         },
         text: {
           primary: '#ffffff',
