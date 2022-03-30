@@ -27,8 +27,8 @@ export default function TryOut({ theme }: { theme?: Theme }) {
   let [output, setOutput] = useState('');
 
   let [loading, setLoading] = useState(false);
-  let editor = useRef<HTMLDivElement>(null);
-  
+  let [ran, setRan] = useState(false);
+  let editor = useRef<HTMLDivElement>(null); 
   let handleRun = function () {
     let code = localStorage.getItem('code') || '';
     if (!code) {
@@ -46,9 +46,10 @@ export default function TryOut({ theme }: { theme?: Theme }) {
         
         setOutput(output + standard + error);
       })
-      .catch(err => setOutput(output + 'Internal Error:\n' + err))
+      .catch(err => setOutput(output + '\nInternal Error:\n' + err))
       .finally(() => {
-        setLoading(false)
+        setLoading(false);
+        setRan(true);
         let out = document.getElementById('out')!;
         out.scrollTop = out?.scrollHeight || 0;
       });
@@ -58,8 +59,8 @@ export default function TryOut({ theme }: { theme?: Theme }) {
     <div className="TryOut">
       <h1 style={{ fontSize: '36pt' }}>try juri</h1>
       <div>
-        <Editor ref={editor}/>
-        <TextField id='out' label='Output' multiline margin='normal' variant='outlined' style={{ width: '40%', minWidth: '400px', margin: '2%' }} rows='25' value={output} disabled />
+        <Editor ref={editor} style={{width: `${ran ? '40%' : '90%'}`}}/>
+        {ran && <TextField id='out' label='Output' multiline margin='normal' variant='outlined' style={{ width: '40%', minWidth: '400px', margin: '2%' }} rows='25' value={output} disabled />}
       </div>
       <Button variant='contained' onClick={handleRun} style={{ fontSize: '20px' }}>
         {loading ? <CircularProgress size='1.7em' /> : <><PlayArrowIcon fontSize='large' />Run</>}</Button>

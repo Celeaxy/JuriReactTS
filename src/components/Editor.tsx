@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 import { basicSetup, EditorState, EditorView } from '@codemirror/basic-setup';
 import { keymap, ViewUpdate } from "@codemirror/view"
 import { juri, highlightStyle as juriHighlightStyle} from "../lang-juri/lang-juri";
@@ -27,8 +27,9 @@ const EditorDiv = styled('div')(({ theme }) => ({
   }
 }));
 
-export default function Editor({ref} : {ref? : React.RefObject<HTMLDivElement>}) {
-  const editor = ref || useRef<HTMLDivElement>(null);
+export default function Editor({ref, style} : {ref? : React.RefObject<HTMLDivElement>, style? : CSSProperties}) {
+  let editor = useRef<HTMLDivElement>(null);
+  editor = ref || editor;
 
   const keybindings = [
     {
@@ -65,6 +66,6 @@ export default function Editor({ref} : {ref? : React.RefObject<HTMLDivElement>})
     return () => view.destroy();
   }, []);
   return (
-    <EditorDiv ref={editor}></EditorDiv>
+    <EditorDiv ref={editor} style={style}></EditorDiv>
   );
 }
