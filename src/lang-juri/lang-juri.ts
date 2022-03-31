@@ -7,12 +7,15 @@ import { completeFromList } from "@codemirror/autocomplete"
 const keywords = ["fun", "repeat", "iterate", "init", "break", "operator", "then", "break"];
 const IF = Tag.define(t.controlKeyword);
 const ListIdentifier = Tag.define(t.variableName);
-const Parameter = Tag.define(t.variableName)
+const Parameter = Tag.define(t.variableName);
+const LiteralCharList = Tag.define(t.string);
+
 let parserWithMetadata = parser.configure({
     props: [
         styleTags({
             if : IF,
             ListIdentifier : ListIdentifier,
+            LiteralCharList : LiteralCharList,
             fun: t.keyword,
             iterate : t.keyword,
             repeat: t.keyword,
@@ -21,6 +24,9 @@ let parserWithMetadata = parser.configure({
             as: t.keyword,
             to: t.keyword,
             then: t.keyword,
+            return: t.keyword,
+            skip: t.keyword,
+            cry: t.keyword,
             operator: t.keyword,
             Operator: t.operatorKeyword,
             Identifier: t.name,
@@ -64,6 +70,7 @@ export function juri() {
 const highlightStyle = HighlightStyle.define([
     {tag: IF, color: "#FF6450"},
     {tag: ListIdentifier, color: "#FFC878"},
+    {tag: LiteralCharList, color: "aa5500"},
     {tag: Parameter, color: "#cfc"},
     {tag: t.number, color: "#efa"},
     {tag: t.operator, color: "#64FFFF"},
