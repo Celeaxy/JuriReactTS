@@ -37,7 +37,7 @@ export default function Output({ result, isOpen, setOpen }: { result: Interprete
 
         <Container>
             <div style={{textAlign: 'right'}}><IconButton color='primary' onClick={() => setOpen(false)}><MinimizeOutlinedIcon/></IconButton></div>
-            {result.status == -1 && (<><ErrorMessage /><hr /></>)}
+            {result.status === -1 && (<><ErrorMessage /><hr /></>)}
             <StandardMessage />
         </Container>
     </StyledPaper>) : <OpenButton />;
