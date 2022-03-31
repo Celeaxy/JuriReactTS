@@ -10,10 +10,8 @@ const EditorDiv = styled('div')(({ theme }) => ({
   color: theme.palette.text.primary,
   textAlign: 'left',
   caretColor: "#0F0",
-  height: '608px',
   minWidth: '400px',
-  width: '40%',
-  margin: '2%',
+  width: '100%',
   display: 'inline-flex',
   overflowY: 'auto',
   
@@ -65,9 +63,6 @@ export default function Editor({reference, style} : {reference? : React.RefObjec
       state: state,
       parent: editor.current!
     });
-    
-    if (!state.doc)
-      view.dispatch({ changes: { from: 0, insert: '\n'.repeat(25) } });
     return () => view.destroy();
   }, []);
   return (
