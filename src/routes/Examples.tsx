@@ -5,13 +5,14 @@ import { List, ListItem, Paper, Button} from "@mui/material";
 function Example({title, code}:{title: string, code : string}){
 
     let copy = () =>{
-        var type = "text/plain";
-        var blob = new Blob([code], { type });
-        var data = [new ClipboardItem({ [type]: blob })];
-        navigator.clipboard.write(data);
+        // var type = "text/plain";
+        // var blob = new Blob([code], { type });
+        // var data = [new ClipboardItem({ [type]: blob })];
+        // navigator.clipboard.write(data);
+        localStorage.setItem('code', code)
     }
 
-    return <div><div><h2>{title} <Button variant='outlined' onClick={copy} color='primary' sx={{fontWeight: 'bold'}}>Copy!</Button></h2></div><div><pre>{code}</pre></div></div>
+    return <div><div><h2>{title} <Button variant='outlined' href='/' onClick={copy} color='primary' sx={{fontWeight: 'bold'}}>Try!</Button></h2></div><div><pre>{code}</pre></div></div>
 }
 export default function Examples() {
     let [examples, setExamples] = useState([] as JSX.Element[])
