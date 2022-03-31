@@ -25,7 +25,7 @@ export default function TryOut({ theme }: { theme?: Theme }) {
   let [interpreterResult, setInterpreterResult] = useState({status: 0} as InterpreterResult)
   let [loading, setLoading] = useState(false);
   let editor = useRef<HTMLDivElement>(null); 
-
+  let [outputOpen, setOutputOpen] = useState(true);
   let handleRun = function () {
     let code = localStorage.getItem('code') || '';
     if (!code) return;
@@ -43,18 +43,20 @@ export default function TryOut({ theme }: { theme?: Theme }) {
         setLoading(false);
       });
   }
+  let outputWidth = function(){
 
+  }
   return (
     <div className="TryOut">
       <h1 style={{ fontSize: '36pt' }}>try juri</h1>
-      <Container sx={{alignItems: 'left'}}>
+      <div style={{textAlign: 'left', padding: '24px 0'}}>
       <Button variant='outlined' onClick={handleRun} style={{ fontSize: '20px' }}>
         {loading ? <CircularProgress size='1.7em' /> : <><PlayArrowIcon fontSize='large' />Run</>}</Button>
-      </Container>
-      <Container>
-        <Editor reference={editor} />
-        {interpreterResult.status != 0 && <Output result={interpreterResult} />}
-      </Container>
+      </div>
+      <div style={{display: 'flex', alignItems: 'self-start'}}>
+        <Editor reference={editor} style={{width: `calc(100% - ${interpreterResult.status == 0 ? 0 : (outputOpen? '44%' : '131px')})`}}/>
+        {interpreterResult.status != 0 && <Output result={interpreterResult} isOpen={outputOpen} setOpen={setOutputOpen}/>}
+      </div>
       
     </div>
 
