@@ -5,12 +5,13 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
     height: '100%',
     width: '40%',
     margin: '0px 2%',
+    maxHeight: '80vh',
     display: 'inline-flex',
     overflowY: 'auto',
     textAlign: 'left'
 }));
 
-export default function Output({ result, isOpen, setOpen}: { result: InterpreterResult, isOpen : boolean, setOpen: Function}) {
+export default function Output({ result, isOpen, setOpen }: { result: InterpreterResult, isOpen : boolean, setOpen: Function}) {
 
     const StandardMessage = () => {
         return <>
@@ -31,7 +32,9 @@ export default function Output({ result, isOpen, setOpen}: { result: Interpreter
         return <Button variant='outlined' color='primary' sx={{margin: '0 24px'}}
          onClick={() => setOpen(true)}>Output</Button>;
     }
-    return isOpen ? (<StyledPaper>
+
+    return isOpen ? (<StyledPaper >
+
         <Container>
             <div style={{textAlign: 'right'}}><IconButton color='primary' onClick={() => setOpen(false)}><MinimizeOutlinedIcon/></IconButton></div>
             {result.status == -1 && (<><ErrorMessage /><hr /></>)}
