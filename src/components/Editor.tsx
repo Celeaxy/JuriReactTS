@@ -11,6 +11,7 @@ const EditorDiv = styled('div')(({ theme }) => ({
   textAlign: 'left',
   caretColor: "#0F0",
   minWidth: '400px',
+  maxHeight: '80vh',
   width: '100%',
   display: 'inline-flex',
   overflowY: 'auto',
