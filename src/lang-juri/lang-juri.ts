@@ -9,13 +9,13 @@ const IF = Tag.define(t.controlKeyword);
 const ListIdentifier = Tag.define(t.variableName);
 const Parameter = Tag.define(t.variableName);
 const LiteralCharList = Tag.define(t.string);
+const ListLengthOperator = Tag.define(t.operator);
 
 let parserWithMetadata = parser.configure({
     props: [
         styleTags({
             if : IF,
             ListIdentifier : ListIdentifier,
-            LiteralCharList : LiteralCharList,
             fun: t.keyword,
             iterate : t.keyword,
             repeat: t.keyword,
@@ -23,15 +23,21 @@ let parserWithMetadata = parser.configure({
             init: t.keyword,
             as: t.keyword,
             to: t.keyword,
+            and : t.keyword,
+            or : t.keyword,
+            not : t.keyword,
             then: t.keyword,
             return: t.keyword,
             skip: t.keyword,
             cry: t.keyword,
+            times: t.keyword,
+            ListLengthOperator: ListLengthOperator,
             operator: t.keyword,
-            Operator: t.operatorKeyword,
-            Identifier: t.name,
+            Operator: t.operator,
+            //Identifier: t.name,
             Parameter: Parameter,
             LineComment: t.lineComment,
+            LiteralCharList : LiteralCharList,
             Number: t.number,
             "( ) [ ]": t.paren
         })
@@ -66,15 +72,15 @@ export function juri() {
     return new LanguageSupport(juriLang, [autocompletion])
 }
 
-
 const highlightStyle = HighlightStyle.define([
     {tag: IF, color: "#FF6450"},
-    {tag: ListIdentifier, color: "#FFC878"},
-    {tag: LiteralCharList, color: "aa5500"},
+    {tag: ListIdentifier, color: "#9DB"},
+    {tag: LiteralCharList, color: "#9DB"},
+    {tag: ListLengthOperator, color: "#FC0"},
     {tag: Parameter, color: "#cfc"},
     {tag: t.number, color: "#efa"},
     {tag: t.operator, color: "#64FFFF"},
-    {tag: t.keyword, color: "#00C8FF"},
+    {tag: t.keyword, color: "#00AAFF"},
     {tag: t.paren, color: "#bbf"},
     {tag: t.comment, color: "#969696", fontStyle: "italic"}
   ])
