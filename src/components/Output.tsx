@@ -4,7 +4,6 @@ import MinimizeOutlinedIcon from '@mui/icons-material/MinimizeOutlined';
 const StyledPaper = styled(Paper)(({ theme }) => ({
     height: '100%',
     width: '40%',
-    margin: '0px 2%',
     maxHeight: '80vh',
     display: 'inline-flex',
     overflowY: 'auto',
@@ -29,7 +28,7 @@ export default function Output({ result, isOpen, setOpen }: { result: Interprete
     }
 
     const OpenButton = () => {
-        return <Button variant='outlined' color='primary' sx={{margin: '0 24px'}}
+        return <Button variant='outlined' color='primary' 
          onClick={() => setOpen(true)}>Output</Button>;
     }
 

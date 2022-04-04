@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useState, ReactNode, useEffect, useCallback, useRef, RefObject, createRef } from 'react';
 import '../style/App.scss';
-import { Button, TextField, CircularProgress, styled, Container } from '@mui/material';
+import { Button, TextField, CircularProgress, styled, Container, Paper } from '@mui/material';
 import { Theme } from '@mui/material';
 import axios from 'axios';
 import Highlighter from '../util/Highlighter';
@@ -48,14 +48,14 @@ export default function TryOut({ theme }: { theme?: Theme }) {
   }
   return (
     <div className="TryOut">
-      <h1 style={{ fontSize: '36pt' }}>try juri</h1>
+      <Paper><h1 style={{ fontSize: '36pt' }}>try juri</h1></Paper>
       <div style={{textAlign: 'left', padding: '24px 0'}}>
       <Button variant='outlined' onClick={handleRun} style={{ fontSize: '20px' }}>
         {loading ? <CircularProgress size='1.7em' /> : <><PlayArrowIcon fontSize='large' />Run</>}</Button>
       </div>
       <div style={{display: 'flex', alignItems: 'self-start'}}>
-        <Editor reference={editor} style={{width: `calc(100% - ${interpreterResult.status == 0 ? 0 : (outputOpen? '44%' : '131px')})`}}/>
-        {interpreterResult.status != 0 && <Output result={interpreterResult} isOpen={outputOpen} setOpen={setOutputOpen}/>}
+        <Editor reference={editor} style={{width: `calc(100% - ${interpreterResult.status == 0 ? 0 : (outputOpen? '40%' : '83px')})`}}/>
+        {interpreterResult.status != 0 && <><div style={{width : '24px'}}></div><Output result={interpreterResult} isOpen={outputOpen} setOpen={setOutputOpen}/> </>}
       </div>
       
     </div>

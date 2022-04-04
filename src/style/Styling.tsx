@@ -4,23 +4,24 @@ import { createTheme, CssBaseline } from '@mui/material';
 
 const globalStylesProps = {
   '.MuiPaper-root.MuiAppBar-root': { backdropFilter: 'blur(4px)', backgroundColor: 'rgba(255,255,255, 0.3)' },
-  '& ::selection': {
-    color: 'transparent', backgroundColor: 'grey',
-    /* width */
 
-  },
   '::-webkit-scrollbar': {
     width: '10px'
   },
-
+  '.cm-selectionBackground' : {
+    backgroundColor: 'rgba(240,170, 120, 0.3) !important'
+  },
   /* Track */
   '::-webkit-scrollbar-track': {
-    background: 'rgba(255,255,255,0.3)'
+    background: 'rgba(255,255,255,0.3)',
+    borderRadius: '10px',
+    margin: '10px'
   },
 
   /* Handle */
   '::-webkit-scrollbar-thumb': {
-    background: 'rgba(255,255,255, 0.3)'
+    background: 'rgba(255,255,255, 0.3)',
+    borderRadius: '10px'
   },
 
   /* Handle on hover */
@@ -43,7 +44,7 @@ const theme = createTheme({
       main: '#f50057',
     },
     background: {
-      default: '#040404',
+      default: '#A7A7A7',
       paper: '#111',
     },
     text: {
